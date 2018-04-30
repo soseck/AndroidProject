@@ -1,4 +1,4 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,23 +12,17 @@
     tools:context="fr.unice.polytech.polyincidents.LoginActivity">
 
     <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="34dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        tools:layout_editor_absoluteX="192dp"
-        tools:layout_editor_absoluteY="294dp" />
 
     <EditText
         android:id="@+id/userID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/password"
+        android:layout_alignStart="@+id/password"
+        android:layout_marginBottom="33dp"
         android:ems="10"
-        android:hint="Identifiant"
+        android:hint="@string/identifiant"
         android:inputType="textPersonName"
-        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="148dp" />
 
@@ -36,9 +30,11 @@
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:ems="10"
-        android:hint="Mot de passe"
-        android:inputType="numberPassword"
+        android:hint="@string/mot_de_passe"
+        android:inputType="textPassword"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="225dp" />
 
@@ -46,6 +42,9 @@
         android:id="@+id/connectedSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/connexionButton"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_marginBottom="25dp"
         android:text="Rester connecté(e)"
         tools:layout_editor_absoluteX="181dp"
         tools:layout_editor_absoluteY="310dp" />
@@ -54,18 +53,26 @@
         android:id="@+id/imageView2"
         android:layout_width="89dp"
         android:layout_height="54dp"
+        android:layout_above="@+id/userID"
+        android:layout_alignEnd="@+id/userID"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="52dp"
         app:srcCompat="@drawable/ic_home_black_24dp"
         tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="47dp"
+        tools:layout_editor_absoluteY="47dp" android:contentDescription="TODO"/>
 
     <Button
         android:id="@+id/connexionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/connectedSwitch"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="83dp"
+        android:layout_marginEnd="19dp"
         android:background="@color/colorAccent"
-        android:text="Connexion"
         android:onClick="onLogin"
+        android:text="Connexion"
         tools:layout_editor_absoluteX="128dp"
         tools:layout_editor_absoluteY="364dp" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

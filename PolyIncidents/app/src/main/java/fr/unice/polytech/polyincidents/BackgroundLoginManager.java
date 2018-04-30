@@ -22,9 +22,13 @@ import java.net.URLEncoder;
 
 public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
 
-    Context context;
-    User connectedUser;
-    AlertDialog alertDialog;
+    private Context context;
+    private User connectedUser;
+    private AlertDialog alertDialog;
+
+    public static final String SUCCESS_MESSAGE = "success";
+    public static final String FAILURE_MESSAGE = "fail";
+
 
     public BackgroundLoginManager(Context context) {
         this.context = context;
