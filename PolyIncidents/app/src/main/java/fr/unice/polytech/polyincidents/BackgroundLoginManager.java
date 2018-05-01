@@ -38,7 +38,7 @@ public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://192.168.37.2/login.php";
+        String login_url = "http://polyincidents.gearhostpreview.com/login.php";
         if(type.equals("login")){
             try {
                 connectedUser = new User(params[1], params[2]);
