@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -15,26 +16,35 @@
 
     <EditText
         android:id="@+id/userID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/password"
-        android:layout_alignStart="@+id/password"
-        android:layout_marginBottom="33dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="217dp"
+        android:background="#11000000"
+        android:drawableLeft="@drawable/ic_action_user"
         android:ems="10"
         android:hint="@string/identifiant"
         android:inputType="textPersonName"
+        android:textSize="16dp"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="148dp" />
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="281dp"
+        android:background="#11000000"
+        android:drawableLeft="@drawable/ic_action_pass"
         android:ems="10"
         android:hint="@string/mot_de_passe"
         android:inputType="textPassword"
+        android:textSize="16dp"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="225dp" />
 
@@ -42,37 +52,36 @@
         android:id="@+id/connectedSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/connexionButton"
-        android:layout_alignStart="@+id/imageView2"
-        android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="119dp"
+        android:layout_marginStart="58dp"
         android:text="Rester connecté(e)"
+        tools:ignore="UnknownId"
         tools:layout_editor_absoluteX="181dp"
         tools:layout_editor_absoluteY="310dp" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="89dp"
-        android:layout_height="54dp"
-        android:layout_above="@+id/userID"
-        android:layout_alignEnd="@+id/userID"
-        android:layout_marginBottom="30dp"
-        android:layout_marginEnd="52dp"
-        app:srcCompat="@drawable/ic_home_black_24dp"
-        tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="47dp" android:contentDescription="TODO"/>
-
     <Button
         android:id="@+id/connexionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/connectedSwitch"
+        android:layout_width="201dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="83dp"
-        android:layout_marginEnd="19dp"
+        android:layout_alignStart="@+id/password"
+        android:layout_marginBottom="37dp"
         android:background="@color/colorAccent"
         android:onClick="onLogin"
         android:text="Connexion"
         tools:layout_editor_absoluteX="128dp"
         tools:layout_editor_absoluteY="364dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="32dp"
+        app:srcCompat="@drawable/iconlogin" />
 
 </RelativeLayout>
