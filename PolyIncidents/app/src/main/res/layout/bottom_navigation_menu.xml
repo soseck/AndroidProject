@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <item
+        android:id="@+id/action_item1"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="home"/>
+    <item
+        android:id="@+id/action_item2"
+        android:icon="@drawable/ic_pageview_black_24dp"
+        android:title="search"/>
+    <item
+        android:id="@+id/action_item3"
+        android:icon="@drawable/ic_photo_camera_black_24dp"
+        android:title="photo"/>
+
+
+    <item
+        android:id="@+id/action_item4"
+        android:icon="@drawable/ic_mode_edit_black_24dp"
+        android:title="declaration"/>
+    <item
+        android:id="@+id/action_item5"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="profile"/>
+</menu>
