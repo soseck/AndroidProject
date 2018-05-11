@@ -3,6 +3,7 @@ package fr.unice.polytech.polyincidents;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,6 +58,10 @@ public class LoginActivity extends AppCompatActivity{
         BackgroundLoginManager loginManager = new BackgroundLoginManager(this);
         loginManager.execute("login", userID, password);
 
+    }
+
+    public void showMenuPage(){
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }
 

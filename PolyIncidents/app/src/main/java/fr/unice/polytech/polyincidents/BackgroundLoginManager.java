@@ -1,8 +1,12 @@
 package fr.unice.polytech.polyincidents;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
+import junit.framework.Test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,10 +28,8 @@ public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
 
     private Context context;
     private User connectedUser;
-    private AlertDialog alertDialog;
 
-    public static final String SUCCESS_MESSAGE = "success";
-    public static final String FAILURE_MESSAGE = "fail";
+    public static final String SUCCESS_LOGIN_MESSAGE = "success";
 
 
     public BackgroundLoginManager(Context context) {
@@ -61,7 +63,7 @@ public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
                 //Response to the post
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                String result = " ";
+                String result = "";
                 String line = "";
                 while( (line = reader.readLine()) != null){
                     result += line;
@@ -69,7 +71,7 @@ public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
                 reader.close();
                 inputStream.close();
                 urlConnection.disconnect();
-                return  result;
+                return result;
 
 
             } catch (MalformedURLException e) {
@@ -84,16 +86,19 @@ public class BackgroundLoginManager extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Etat connexion");
-
     }
 
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
-    }
+        if(TestInternetConnection.isConnectedInternet((Activity) this.context)){
+            if(result.equals(SUCCESS_LOGIN_MESSAGE)){
+                this.context.startActivity(new Intent(this.context.getApplicationContext(), MenuActivity.class));
+            }else{
+                Toast.makeText(this.context.getApplicationContext(), "Identifiant et/ou mot de passe incorrect(s)", Toast.LENGTH_SHORT).show();
+            }
+            }
+        }
+
 
     @Override
     protected void onProgressUpdate(Void... values) {
