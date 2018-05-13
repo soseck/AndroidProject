@@ -1,5 +1,9 @@
 package fr.unice.polytech.polyincidents;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Sokhna on 30/04/2018.
  */
@@ -9,13 +13,6 @@ public class User {
     private String password;
     private String name;
     private String surname;
-
-    public User(String userID, String password) {
-        this.userID = userID;
-        this.password = password;
-    }
-
-
 
     public String getUserID() {
         return userID;
@@ -47,5 +44,15 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void setUserAttributes(String jsonAttributes){
+        try {
+            JSONObject jsonObj = (new JSONArray(jsonAttributes.toString())).getJSONObject(0);
+            this.name = jsonObj.getString("name");
+            this.surname = jsonObj.getString("surname");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
