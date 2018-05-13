@@ -11,7 +11,8 @@ import android.os.Bundle;
  */
 
 public class FirstLaunchActivity extends Activity {
-    public static final String FIRST_APP_LAUNCH = "fr.unice.polytech.polyincidents.firstLaunch";
+    public static final String FIRST_APP_LAUNCH = "firstLaunchForUser";
+    public static final String LOGGED_IN_KEY = "alreadyLoggedIn";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,22 +22,22 @@ public class FirstLaunchActivity extends Activity {
             setFirstAppLaunch(false);
             startActivity(new Intent(this, LoginActivity.class));
         } else {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MenuActivity.class));
         }
 
         finish();
     }
 
-    //TODO Always set at default value (true). Look for another way to store the boolean.
     private boolean isFirstAppLaunch() {
-        SharedPreferences preferences = this.getPreferences(Context.MODE_PRIVATE);
-        return preferences.getBoolean(FIRST_APP_LAUNCH, false);
+        SharedPreferences preferences = getSharedPreferences(FIRST_APP_LAUNCH,Context.MODE_PRIVATE);
+        return preferences.getBoolean(LOGGED_IN_KEY, true);
     }
 
-    private void setFirstAppLaunch(boolean value) {
-        SharedPreferences preferences = this.getPreferences(Context.MODE_PRIVATE);
+    //Set to false when we deconnect.
+    public void setFirstAppLaunch(boolean value) {
+        SharedPreferences preferences = getSharedPreferences(FIRST_APP_LAUNCH, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(FIRST_APP_LAUNCH, value);
+        editor.putBoolean(LOGGED_IN_KEY, value);
         editor.apply();
     }
 }

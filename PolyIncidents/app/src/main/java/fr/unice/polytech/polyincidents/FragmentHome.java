@@ -5,10 +5,17 @@ package fr.unice.polytech.polyincidents;
  */
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentHome extends Fragment {
     public static FragmentHome newInstance() {
@@ -25,5 +32,12 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        new BackgroundNewsFeedManager(this.getContext()).execute(NewsGroup.ALL);
+
     }
 }
