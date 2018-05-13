@@ -12,10 +12,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static fr.unice.polytech.polyincidents.NewsGroup.ALL;
 
@@ -32,7 +31,7 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
 
 
     public static final String FAILURE_POST_MESSAGE = "failed";
-    public static final String SCRIPT_FILE = "/get.php";
+    public static final String SCRIPT_FILE = "/getAll.php";
     public static final String REQUEST_METHOD = "POST";
 
     public BackgroundNewsFeedManager(Context context) {
@@ -54,6 +53,7 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         }
         System.out.println(result);
         if(!result.equals(FAILURE_POST_MESSAGE)){
+            result = new String(result.getBytes(Charset.forName("ISO-8859-1")),Charset.forName("UTF-8"));
             try {
                 setDeclarationList(new JSONArray(result.toString()));
             } catch (JSONException e) {
