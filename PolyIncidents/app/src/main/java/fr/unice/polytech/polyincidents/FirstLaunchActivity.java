@@ -30,7 +30,7 @@ public class FirstLaunchActivity extends Activity {
     //TODO Always set at default value (true). Look for another way to store the boolean.
     private boolean isFirstAppLaunch() {
         SharedPreferences preferences = this.getPreferences(Context.MODE_PRIVATE);
-        return preferences.getBoolean(FIRST_APP_LAUNCH, true);
+        return preferences.getBoolean(FIRST_APP_LAUNCH, false);
     }
 
     private void setFirstAppLaunch(boolean value) {

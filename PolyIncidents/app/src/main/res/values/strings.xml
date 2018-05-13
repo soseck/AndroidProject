@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">Poly\'Incidents</string>
+    <string name="app_declaration">Déclaration</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_login">Connexion</string>
+    <string name="title_activity_logout">Déconnexion</string>
+    <string name="title_settings">Paramètres</string>
+    <string name="title_help">Aides</string>
+    <!-- Strings related to declaration form -->
+    <string name="title_declaration">Déclarer un incident</string>
+    <string name="title_incident">Titre</string>
+    <string name="type_incident">Type</string>
+    <string name="importance_incident">Importance</string>
+    <string name="notimportant_incident">Pas important</string>
+    <string name="important_incident">Important</string>
+    <string name="veryimportant_incident">Très important</string>
+    <string name="takepicturetext_incident">Prendre une photo de l\'incident</string>
+
 
     <!-- Strings related to login -->
     <string name="mot_de_passe">Mot de passe</string>
