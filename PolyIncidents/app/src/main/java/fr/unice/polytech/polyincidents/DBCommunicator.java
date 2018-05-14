@@ -21,8 +21,8 @@ import java.util.Map;
 
 public class DBCommunicator extends AsyncTask<Map<String, String>, Void, String> {
 
-    public static final String SERVER_URL = "http://polyincidents.gearhostpreview.com";
-    //public static final String SERVER_URL = "http://192.168.1.67";
+    //public static final String SERVER_URL = "http://polyincidents.gearhostpreview.com";
+    public static final String SERVER_URL = "http://192.168.1.67";
 
     private Map<String, String> postDataMap;
     private String scriptfile, requestMethod;

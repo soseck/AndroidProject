@@ -62,10 +62,6 @@ public class MenuActivity extends AppCompatActivity {
         ((FragmentDeclaration)selectedFragment).sendDeclaration(view);
     }
 
-    public void takePicture(View view){
-        ((FragmentDeclaration)selectedFragment).takePicture(view);
-    }
-
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
     }
