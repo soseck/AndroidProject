@@ -14,7 +14,9 @@ import org.json.JSONObject;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static fr.unice.polytech.polyincidents.NewsGroup.ALL;
 
@@ -48,6 +50,12 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         switch (newsGroup){
             case ALL:
                  result = communicator.doInBackground( null);
+                break;
+            case BY_USER:
+                SharedPreferences preferences = context.getSharedPreferences(LoginActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
+                Map<String, String> postDataMap = new HashMap<String, String>();
+                postDataMap.put("username", preferences.getString(LoginActivity.USERNAME_PREF_KEY, ""));
+                result = communicator.doInBackground(postDataMap);
                 break;
             default: break;
         }

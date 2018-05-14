@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -61,11 +62,12 @@ public class MenuActivity extends AppCompatActivity {
         ((FragmentDeclaration)selectedFragment).sendDeclaration(view);
     }
 
-    public void takePicture(View view){
-        ((FragmentDeclaration)selectedFragment).takePicture(view);
-    }
-
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+       return new FragmentSearch().onCreateOptionsMenu(menu);
     }
 }
