@@ -12,18 +12,58 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageInfo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/titleInfo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="61dp"
-            android:layout_toStartOf="@+id/tagInfo"
+            android:layout_alignStart="@+id/dateInfo"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:shadowColor="@color/text_shadow"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:text="TitreIncident"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
 
+        <EditText
+            android:id="@+id/contentInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/titleInfo"
+            android:layout_below="@+id/titleInfo"
+            android:lines="3"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:text="Description"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/dateInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contentInfo"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:text="jj/mm/aaaa"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"/>
+
+    </RelativeLayout>
+
+        <!--
         <TextView
             android:id="@+id/tagInfo"
             android:layout_width="wrap_content"
@@ -41,17 +81,9 @@
             android:layout_alignParentTop="true"
             android:layout_weight="1"
             android:text="TextView" />
+        -->
 
-        <TextView
-            android:id="@+id/dateInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/titleInfo"
-            android:layout_marginTop="18dp"
-            android:layout_weight="1"
-            android:text="TextView" />
-
+        <!--
         <TextView
             android:id="@+id/urgenceInfo"
             android:layout_width="wrap_content"
@@ -66,50 +98,25 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/urgenceInfo"
-            android:text="TextView" />
+            android:text="TextView" /> -->
 
-        <TextView
-            android:id="@+id/contentInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/titleInfo"
-            android:text="TextView" />
-
+        <!--
         <TextView
             android:id="@+id/authorInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/dateInfo"
             android:layout_alignEnd="@+id/contentInfo"
-            android:text="TextView" />
-
-    </RelativeLayout>
+            android:text="TextView" /> -->
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/imageInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="99dp"
-            android:layout_centerInParent="true"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-    </RelativeLayout>
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="@color/colorPrimary">
-
     </RelativeLayout>
 
 </LinearLayout>
