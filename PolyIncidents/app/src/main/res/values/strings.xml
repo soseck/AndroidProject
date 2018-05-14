@@ -8,6 +8,8 @@
     <string name="title_activity_logout">Déconnexion</string>
     <string name="title_settings">Paramètres</string>
     <string name="title_help">Aides</string>
+    <string name="title_search">Recherche</string>
+
     <!-- Strings related to declaration form -->
     <string name="title_declaration">Déclarer un incident</string>
     <string name="title_incident">Titre</string>
