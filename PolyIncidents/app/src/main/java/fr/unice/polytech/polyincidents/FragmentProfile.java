@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class FragmentProfile extends Fragment {
+    public static final String SCRIPT_FILE = "/getIncidentsByUser.php";
+    public static final Integer VIEW_ID = R.id.profileListView;
+
     public static FragmentProfile newInstance() {
         FragmentProfile fragment = new FragmentProfile();
         return fragment;
@@ -28,9 +31,11 @@ public class FragmentProfile extends Fragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        new BackgroundNewsFeedManager(this.getContext()).execute(NewsGroup.BY_USER);
+        new BackgroundNewsFeedManager(this.getContext(), SCRIPT_FILE, VIEW_ID).execute(NewsGroup.BY_USER);
     }
+
 }

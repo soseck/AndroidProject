@@ -25,14 +25,14 @@ public class NewsFeedAdapter extends ArrayAdapter<Declaration> {
             convertView = inflater.inflate(R.layout.fragment_declaration_item, null);
         }
         Declaration declaration = getItem(position);
-        ((TextView)convertView.findViewById(R.id.title)).setText(declaration.getTitle());
-        ((TextView)convertView.findViewById(R.id.authorInfo)).setText(declaration.getAuthor().getSurname() + declaration.getAuthor().getName());
-        ((TextView)convertView.findViewById(R.id.location)).setText(declaration.getLocation());
+        ((TextView)convertView.findViewById(R.id.titleInfo)).setText(declaration.getTitle());
+        //((TextView)convertView.findViewById(R.id.authorInfo)).setText(declaration.getAuthor().getSurname() + declaration.getAuthor().getName());
+        //((TextView)convertView.findViewById(R.id.location)).setText(declaration.getLocation());
         ((TextView)convertView.findViewById(R.id.dateInfo)).setText(declaration.getDateValue());
-        ((TextView)convertView.findViewById(R.id.urgenceInfo)).setText(declaration.getUrgence());
-        ((TextView)convertView.findViewById(R.id.importanceInfo)).setText(declaration.getImportance());
+        //((TextView)convertView.findViewById(R.id.urgenceInfo)).setText(declaration.getUrgence());
+        //((TextView)convertView.findViewById(R.id.importanceInfo)).setText(declaration.getImportance());
         ((TextView)convertView.findViewById(R.id.contentInfo)).setText(declaration.getContent());
-        ((TextView)convertView.findViewById(R.id.tagInfo)).setText(declaration.getTag());
+        //((TextView)convertView.findViewById(R.id.tagInfo)).setText(declaration.getTag());
 
         if(declaration.isWithImage()){
             //String url = declaration.getImageURL();

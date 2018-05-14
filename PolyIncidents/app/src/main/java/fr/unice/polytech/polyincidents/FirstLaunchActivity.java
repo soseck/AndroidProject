@@ -11,7 +11,7 @@ import android.os.Bundle;
  */
 
 public class FirstLaunchActivity extends Activity {
-    public static final String FIRST_APP_LAUNCH = "firstLaunchForUser";
+    public static final String FIRST_APP_LAUNCH = "firstLaunchUser";
     public static final String LOGGED_IN_KEY = "alreadyLoggedIn";
 
     @Override

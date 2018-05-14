@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentHome extends Fragment {
+    public static final String SCRIPT_FILE = "/getAll.php";
+    public static final Integer VIEW_ID = R.id.gridListView;
+
     public static FragmentHome newInstance() {
         FragmentHome fragment = new FragmentHome();
         return fragment;
@@ -37,7 +40,7 @@ public class FragmentHome extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        new BackgroundNewsFeedManager(this.getContext()).execute(NewsGroup.ALL);
+        new BackgroundNewsFeedManager(this.getContext(), SCRIPT_FILE, VIEW_ID ).execute(NewsGroup.ALL);
 
     }
 }

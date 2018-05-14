@@ -65,9 +65,10 @@ public class MenuActivity extends AppCompatActivity {
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
        return new FragmentSearch().onCreateOptionsMenu(menu);
     }
+*/
 }

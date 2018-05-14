@@ -2,7 +2,6 @@ package fr.unice.polytech.polyincidents;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.GridView;
 import android.widget.ListAdapter;
@@ -14,36 +13,31 @@ import org.json.JSONObject;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static fr.unice.polytech.polyincidents.NewsGroup.ALL;
+import static fr.unice.polytech.polyincidents.NewsGroup.BY_USER;
 
 /**
- * Created by user on 13/05/2018.
+ * Created by Donelia on 13/05/2018.
  */
 
-public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<Declaration>> {
+public class BackgroundByUserManager extends AsyncTask<NewsGroup, Void, List<Declaration>> {
 
     private Context context;
     private DBCommunicator communicator;
     private NewsGroup newsGroup;
     private List<Declaration> declarationList;
-    private String scriptFile;
-    private Integer viewID;
 
 
-    public static final String FAILURE_POST_MESSAGE = "fail";
+    public static final String FAILURE_POST_MESSAGE = "failed";
+    public static final String SCRIPT_FILE = "/getIncidentsByUser.php";
     public static final String REQUEST_METHOD = "POST";
 
-    public BackgroundNewsFeedManager(Context context, String scriptFile, Integer viewID) {
+    public BackgroundByUserManager(Context context) {
         this.context = context;
-        this.scriptFile = scriptFile;
-        this.communicator = new DBCommunicator(scriptFile, REQUEST_METHOD);
-        this.newsGroup = ALL;
+        this.communicator = new DBCommunicator(SCRIPT_FILE, REQUEST_METHOD);
+        this.newsGroup = BY_USER;
         this.declarationList = new ArrayList<>();
-        this.viewID = viewID;
     }
 
     @Override
@@ -51,14 +45,8 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         newsGroup = params[0];
         String result = "";
         switch (newsGroup){
-            case ALL:
-                 result = communicator.doInBackground( null);
-                break;
             case BY_USER:
-                SharedPreferences preferences = context.getSharedPreferences(LoginActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
-                Map<String, String> postDataMap = new HashMap<String, String>();
-                postDataMap.put("username", preferences.getString(LoginActivity.USERNAME_PREF_KEY, ""));
-                result = communicator.doInBackground(postDataMap);
+                result = communicator.doInBackground( null);
                 break;
             default: break;
         }
@@ -85,7 +73,7 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
             if(!declarationList.isEmpty()){
                 Toast.makeText(this.context.getApplicationContext(), "News Feed loading succeded ! ", Toast.LENGTH_SHORT).show();
                 ListAdapter newsFeedAdapter = new NewsFeedAdapter(context, declarationList);
-                GridView grid = ((MenuActivity)context).findViewById(viewID);
+                GridView grid = ((MenuActivity)context).findViewById(R.id.gridListView);
                 grid.setAdapter(newsFeedAdapter);
             }else{
                 Toast.makeText(this.context.getApplicationContext(), "News Feed loading failed.. ", Toast.LENGTH_SHORT).show();
@@ -104,9 +92,9 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
             for(int i = 0; i<jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Declaration declaration = new Declaration();
-                    User author = new User();
-                    author.setSurname(jsonObject.getString("surname"));
-                    author.setName(jsonObject.getString("name"));
+                User author = new User();
+                author.setSurname(jsonObject.getString("surname"));
+                author.setName(jsonObject.getString("name"));
                 declaration.setAuthor(author);
                 declaration.setTitle(jsonObject.getString("title"));
                 declaration.setContent(jsonObject.getString("content"));
@@ -126,3 +114,4 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         return declarationList;
     }
 }
+
