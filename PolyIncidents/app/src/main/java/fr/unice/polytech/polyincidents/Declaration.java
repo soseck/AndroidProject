@@ -1,6 +1,10 @@
 package fr.unice.polytech.polyincidents;
 
+import android.content.Context;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -124,4 +128,5 @@ public class Declaration {
     public User getAuthor() {
         return author;
     }
+
 }

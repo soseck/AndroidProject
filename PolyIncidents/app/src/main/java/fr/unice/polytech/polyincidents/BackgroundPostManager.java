@@ -38,7 +38,7 @@ public class BackgroundPostManager extends AsyncTask<Declaration, Void, String> 
         post_data = declaration.getMapPostData();
         SharedPreferences preferences = context.getSharedPreferences(LoginActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
         post_data.put(LoginActivity.USERNAME_PREF_KEY, preferences.getString(LoginActivity.USERNAME_PREF_KEY, ""));
-        String result = communicator.doInBackground(post_data);
+        String result = communicator.sendRequest(post_data);
         return result;
 
     }

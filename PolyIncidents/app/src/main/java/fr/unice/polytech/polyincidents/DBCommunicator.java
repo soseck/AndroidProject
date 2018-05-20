@@ -19,10 +19,10 @@ import java.util.Map;
  * Created by Sokhna on 12/05/2018.
  */
 
-public class DBCommunicator extends AsyncTask<Map<String, String>, Void, String> {
+public class DBCommunicator {
 
-    public static final String SERVER_URL = "http://polyincidents.gearhostpreview.com";
-    //public static final String SERVER_URL = "http://192.168.1.67";
+    //public static final String SERVER_URL = "http://polyincidents.gearhostpreview.com";
+    public static final String SERVER_URL = "http://192.168.43.92";
 
     private Map<String, String> postDataMap;
     private String scriptfile, requestMethod;
@@ -33,18 +33,7 @@ public class DBCommunicator extends AsyncTask<Map<String, String>, Void, String>
         this.postDataMap = null;
     }
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
-
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-    }
-
-    @Override
-    protected String doInBackground(Map<String, String>... postDataMaps){
+    public String sendRequest(Map<String, String>... postDataMaps){
             try {
                 this.postDataMap = (postDataMaps == null ) ? null : postDataMaps[0];
                 URL url = new URL(SERVER_URL + scriptfile);
@@ -83,7 +72,7 @@ public class DBCommunicator extends AsyncTask<Map<String, String>, Void, String>
                 reader.close();
                 inputStream.close();
                 urlConnection.disconnect();
-                System.out.println(result);
+                System.out.println("DB comm "+ result);
                 return result;
 
             } catch (MalformedURLException e) {
@@ -91,6 +80,6 @@ public class DBCommunicator extends AsyncTask<Map<String, String>, Void, String>
             } catch (IOException e){
                 e.printStackTrace();
             }
-            return "failed";
+            return "fail";
         }
 }
