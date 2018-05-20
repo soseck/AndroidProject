@@ -18,7 +18,7 @@
     <string name="notimportant_incident">Pas important</string>
     <string name="important_incident">Important</string>
     <string name="veryimportant_incident">Très important</string>
-    <string name="takepicturetext_incident">Prendre une photo de l\'incident</string>
+    <string name="takepicturetext_incident">Prendre une photo</string>
 
 
     <!-- Strings related to login -->

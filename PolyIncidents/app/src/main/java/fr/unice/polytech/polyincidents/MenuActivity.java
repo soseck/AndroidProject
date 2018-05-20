@@ -1,14 +1,16 @@
 package fr.unice.polytech.polyincidents;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
     Fragment selectedFragment;
@@ -51,24 +53,43 @@ public class MenuActivity extends AppCompatActivity {
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-      //  transaction.replace(R.id.frame_layout, ItemOneFragment.newInstance());
+        transaction.replace(R.id.frame_layout,selectedFragment);
         transaction.commit();
 
         //Used to select an item programmatically
-        //bottomNavigationView.getMenu().getItem(2).setChecked(true);
-    }
-
-    public void sendDeclaration(View view) {
-        ((FragmentDeclaration)selectedFragment).sendDeclaration(view);
+        bottomNavigationView.setSelectedItemId(0);
     }
 
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
     }
+
+
+    //<editor-fold desc="FragmentDeclarationMethods">
+    public void sendDeclaration(View view) {
+        ((FragmentDeclaration)selectedFragment).sendDeclaration(view);
+    }
+
+    public void takePicture(View view){
+        ((FragmentDeclaration)selectedFragment).takePicture(view);
+    }
+
+    public void showMap(View view){
+        ((FragmentDeclaration)selectedFragment).showMap(view);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    //</editor-fold>
+
+
 /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
        return new FragmentSearch().onCreateOptionsMenu(menu);
     }
 */
+
 }

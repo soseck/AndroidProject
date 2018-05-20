@@ -52,17 +52,17 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         String result = "";
         switch (newsGroup){
             case ALL:
-                 result = communicator.doInBackground( null);
+                 result = communicator.sendRequest( null);
                 break;
             case BY_USER:
                 SharedPreferences preferences = context.getSharedPreferences(LoginActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
                 Map<String, String> postDataMap = new HashMap<String, String>();
                 postDataMap.put("username", preferences.getString(LoginActivity.USERNAME_PREF_KEY, ""));
-                result = communicator.doInBackground(postDataMap);
+                result = communicator.sendRequest(postDataMap);
                 break;
             default: break;
         }
-        System.out.println(result);
+        System.out.println("Manager " + result);
         if(!result.equals(FAILURE_POST_MESSAGE)){
             result = new String(result.getBytes(Charset.forName("ISO-8859-1")),Charset.forName("UTF-8"));
             try {
