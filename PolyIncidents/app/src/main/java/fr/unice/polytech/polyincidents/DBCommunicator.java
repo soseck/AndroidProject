@@ -1,7 +1,5 @@
 package fr.unice.polytech.polyincidents;
 
-import android.os.AsyncTask;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -21,8 +19,8 @@ import java.util.Map;
 
 public class DBCommunicator {
 
-    //public static final String SERVER_URL = "http://polyincidents.gearhostpreview.com";
-    public static final String SERVER_URL = "http://192.168.43.92";
+    public static final String SERVER_URL = "http://polyincidents.gearhostpreview.com";
+    //public static final String SERVER_URL = "http://192.168.43.92";
 
     private Map<String, String> postDataMap;
     private String scriptfile, requestMethod;
