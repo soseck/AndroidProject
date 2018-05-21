@@ -81,12 +81,12 @@ public class BackgroundSearch extends AsyncTask<NewsGroup, Void, List<Declaratio
     protected void onPostExecute(List<Declaration> declarationList) {
         if(TestInternetConnection.isConnectedInternet((Activity) this.context)){
             if(!declarationList.isEmpty()){
-                Toast.makeText(this.context.getApplicationContext(), "News Feed loading succeded ! ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.context.getApplicationContext(), "Search loading succeded ! ", Toast.LENGTH_SHORT).show();
                 ListAdapter newsFeedAdapter = new NewsFeedAdapter(context, declarationList);
                 GridView grid = ((MenuActivity)context).findViewById(viewID);
                 grid.setAdapter(newsFeedAdapter);
             }else{
-                Toast.makeText(this.context.getApplicationContext(), "News Feed loading failed.. ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.context.getApplicationContext(), "Search loading failed.. ", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -110,9 +110,9 @@ public class BackgroundSearch extends AsyncTask<NewsGroup, Void, List<Declaratio
                 declaration.setContent(jsonObject.getString("content"));
                 declaration.setLocation(jsonObject.getString("location"));
                 declaration.setDateValue(jsonObject.getString("date"));
-                declaration.setImportance(jsonObject.getString("importance"));
-                declaration.setUrgence(jsonObject.getString("urgence"));
-                declaration.setTag(jsonObject.getString("tag"));
+              //  declaration.setImportance(jsonObject.getString("importance"));
+              //  declaration.setUrgence(jsonObject.getString("urgence"));
+                //declaration.setTag(jsonObject.getString("tag"));
 
                 declarationList.add(declaration);
             }

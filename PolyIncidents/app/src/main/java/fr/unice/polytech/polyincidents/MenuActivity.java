@@ -12,6 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class MenuActivity extends AppCompatActivity {
     Fragment selectedFragment;
@@ -36,11 +40,6 @@ public class MenuActivity extends AppCompatActivity {
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = FragmentSearch.newInstance();
-                                Intent intent = getIntent();
-                                if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-                                    String query = intent.getStringExtra(SearchManager.QUERY);
-                                    FragmentSearch.newInstance().doMySearch(query);
-                                }
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = FragmentPhoto.newInstance();
@@ -54,7 +53,6 @@ public class MenuActivity extends AppCompatActivity {
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
-
                         transaction.commit();
                         return true;
                     }

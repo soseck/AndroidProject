@@ -41,7 +41,8 @@ public class FragmentSearch extends Fragment  {
 
     MaterialSearchView searchView;
     public static final String SCRIPT_FILE = "/getSearch.php";
-    public static final Integer VIEW_ID = R.id.gridListView;
+    public static final String SCRIPT_FILE_TEST = "/getAll.php";
+    public static final Integer VIEW_ID = R.id.SearchListView;
 
     public static FragmentSearch newInstance() {
         FragmentSearch fragment = new FragmentSearch();
@@ -51,7 +52,9 @@ public class FragmentSearch extends Fragment  {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        new BackgroundNewsFeedManager(this.getContext(), SCRIPT_FILE, VIEW_ID).execute(NewsGroup.ALL);
+        String searchtext ="title";
+       // new BackgroundSearch(this.getContext(), SCRIPT_FILE, VIEW_ID, searchtext).execute(NewsGroup.ALL);
+
 
     }
 
@@ -65,33 +68,31 @@ public class FragmentSearch extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search, container, false);
-        /*
-       Toolbar toolbar = (Toolbar)rootView.findViewById(R.id.toolbar_help);
-        ((MenuActivity)getActivity()).setSupportActionBar(toolbar);
-        ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Recherche Incidents");
-        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+        SearchView simpleSearchView = (SearchView) rootView.findViewById(R.id.action_search); // inititate a search view
 
-        searchView = (MaterialSearchView) rootView.findViewById((R.id.action_search));
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        // perform set on query text listener event
+        simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                doMySearch (query);
-                return true;
-                //votre code ici
+            // do something on text submit
+                doMySearch(query);
+              //  EventBus.getDefault().post(new QueryEvent(query));
+                return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                doMySearch(s);
-                return true;
+            public boolean onQueryTextChange(String newText) {
+            // do something when text changes
+                doMySearch(newText);
+                return false;
             }
         });
-        */
+
         return rootView;
     }
 
 
-    public void doMySearch( String query){
+    public void doMySearch(String query){
         new BackgroundSearch(this.getContext(), SCRIPT_FILE, VIEW_ID, query).execute(NewsGroup.ALL);
     }
 
