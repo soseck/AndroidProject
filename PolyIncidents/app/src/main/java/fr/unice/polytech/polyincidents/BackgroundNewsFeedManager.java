@@ -117,7 +117,7 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
                 declaration.setUrgence(jsonObject.getString("urgence"));
                 declaration.setTag(jsonObject.getString("tag"));
                 imageLoader = new BackgroundImageLoader(jsonObject.getInt("id_incident"), declaration);
-                imageLoader.execute(declaration.getImage());
+                imageLoader.execute();
                 declarationList.add(declaration);
             }
 

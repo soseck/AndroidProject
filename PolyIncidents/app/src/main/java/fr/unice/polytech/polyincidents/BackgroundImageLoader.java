@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by user on 21/05/2018.
  */
 
-public class BackgroundImageLoader extends AsyncTask<Bitmap, Void, Bitmap> {
+public class BackgroundImageLoader extends AsyncTask<Void, Void, Void> {
 
     Integer incident_ID;
     DBCommunicator communicator;
@@ -35,15 +35,15 @@ public class BackgroundImageLoader extends AsyncTask<Bitmap, Void, Bitmap> {
     }
 
     @Override
-    protected Bitmap doInBackground(Bitmap... bitmaps) {
-        Bitmap bitmap = bitmaps[0];
+    protected Void doInBackground(Void... voids) {
+        Bitmap bitmap = null;
 
         postDataMap.put("incident_ID", String.valueOf(incident_ID));
 
 
         String result = communicator.sendRequest(postDataMap);
         if(result.equals("No Image")){
-            return bitmap;
+            return null;
         }
         String filepath ="";
         try {
@@ -56,17 +56,12 @@ public class BackgroundImageLoader extends AsyncTask<Bitmap, Void, Bitmap> {
         try {
             stream = new java.net.URL(image_url).openStream();
             bitmap = BitmapFactory.decodeStream(stream);
+            declaration.setImage(bitmap);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return bitmap;
+        return null;
 
-    }
-
-    @Override
-    protected void onPostExecute(Bitmap bitmap) {
-        super.onPostExecute(bitmap);
-        declaration.setImage(bitmap);
     }
 }

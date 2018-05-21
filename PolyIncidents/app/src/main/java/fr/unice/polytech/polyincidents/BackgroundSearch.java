@@ -56,7 +56,7 @@ public class BackgroundSearch extends AsyncTask<NewsGroup, Void, List<Declaratio
             case ALL:
                 Map<String, String> postDataMap = new HashMap<String, String>();
                 postDataMap.put("searchtext", searchtext);
-                result = communicator.doInBackground(postDataMap);
+                result = communicator.sendRequest(postDataMap);
                 break;
             default: break;
         }
