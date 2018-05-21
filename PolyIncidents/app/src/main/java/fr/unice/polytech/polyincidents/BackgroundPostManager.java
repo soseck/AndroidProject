@@ -51,7 +51,7 @@ public class BackgroundPostManager extends AsyncTask<Declaration, Void, String> 
 
         SharedPreferences preferences = context.getSharedPreferences(LoginActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
         post_data.put(LoginActivity.USERNAME_PREF_KEY, preferences.getString(LoginActivity.USERNAME_PREF_KEY, ""));
-        String result = communicator.doInBackground(post_data);
+        String result = communicator.sendRequest(post_data);
 
         if(!result.equals(FAILURE_POST_MESSAGE) && declaration.getImage()!=null){
             //postImage
@@ -70,7 +70,7 @@ public class BackgroundPostManager extends AsyncTask<Declaration, Void, String> 
             postDataMap.put("encoded_string",encoded_string);
             postDataMap.put("image_name",image_name);
 
-            result = communicator.doInBackground(postDataMap);
+            result = communicator.sendRequest(postDataMap);
 
             Log.i("image", "request post image  sent - result : "+result);
         }else if (!result.equals(FAILURE_POST_MESSAGE) && declaration.getImage()==null){

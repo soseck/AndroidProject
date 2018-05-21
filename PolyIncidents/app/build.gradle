@@ -32,12 +32,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:27.1.1'
     compile 'com.weiwangcn.betterspinner:library-material:1.1.0'
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
-}
-
-repositories {
-    maven {
-        url 'https://maven.google.com'
-    }
+    compile 'com.twitter.sdk.android:twitter-core:3.1.1'
+    compile 'com.twitter.sdk.android:tweet-ui:3.1.1'
+    compile 'com.twitter.sdk.android:tweet-composer:3.1.1'
 }
 
 

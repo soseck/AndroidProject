@@ -8,10 +8,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,12 +19,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.twitter.sdk.android.core.Twitter;
+
+
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.io.File;
@@ -51,7 +54,7 @@ public class FragmentDeclaration extends Fragment {
     Button captureButton;
     ImageView imgTaken;
 
-    private static final int CAM_REQUEST=1313;
+    private static final int CAM_REQUEST=1888;
 
 
     public static FragmentDeclaration newInstance() {
@@ -62,8 +65,6 @@ public class FragmentDeclaration extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -153,6 +154,11 @@ public class FragmentDeclaration extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     public void sendDeclaration(View view) {
         Log.i("image", "In SendDeclaration");
 
@@ -223,6 +229,13 @@ public class FragmentDeclaration extends Fragment {
         // TODO show Map
     }
 
+    public void tweet(View view){
+        TweetComposer.Builder builder = new TweetComposer.Builder(getContext())
+                .text("@PIncidents " + content.getText().toString());//any sharing text here
+           //     .image(fileUri);//sharing image uri
+        builder.show();
+    }
+
     private void fillSpinners() {
         BackgroundFieldsValueManager fieldsValueManager = new BackgroundFieldsValueManager(getContext(), R.id.tag);
         fieldsValueManager.execute(TAG_KEY);
@@ -233,42 +246,5 @@ public class FragmentDeclaration extends Fragment {
         fieldsValueManager = new BackgroundFieldsValueManager(getContext(), R.id.importance);
         fieldsValueManager.execute(IMPORTANCE_KEY);
     }
-/*
-    private class Image_Encoder extends AsyncTask<Void, Void,String>{
-        @Override
-        protected String doInBackground(Void... voids) {
 
-            bitmap = BitmapFactory.decodeFile(fileUri.getPath());
-            Log.i("image", "on DoInBack");
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            bitmap.recycle();
-
-            byte[] array = stream.toByteArray();
-            encoded_string = Base64.encodeToString(array, 0);
-            image_name = "imageTaken.jpg";
-
-            DBCommunicator communicator = new DBCommunicator("/postImage.php", "POST");
-            Map<String, String> postDataMap = new HashMap<>();
-            postDataMap.put("encoded_string",encoded_string);
-            postDataMap.put("image_name",image_name);
-
-            String result = communicator.sendRequest(postDataMap);
-
-            Log.i("image", "request sent - result : "+result);
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            if(result.equals("success")){
-                Log.i("image", "Post execute - success");
-                imagePosted = true;
-            }else{
-                Toast.makeText(getContext(), "image not stored in fileSystem", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    */
 }

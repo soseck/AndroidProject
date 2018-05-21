@@ -7,6 +7,25 @@
     android:background="@drawable/gradient"
     tools:layout_editor_absoluteY="25dp">
 
+    <Button
+        android:id="@+id/tweetButton"
+        android:layout_width="116dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="470dp"
+        android:background="@color/colorWhite"
+        android:onClick="tweet"
+        android:text="Tweeter"
+        android:textColor="@color/tw__blue_default"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -272,11 +291,11 @@
 
     <Button
         android:id="@+id/sendButton"
-        android:layout_width="168dp"
+        android:layout_width="116dp"
         android:layout_height="35dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="200dp"
         android:layout_marginTop="470dp"
         android:background="@drawable/rounded_button"
         android:onClick="sendDeclaration"

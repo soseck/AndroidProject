@@ -52,13 +52,13 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         String result = "";
         switch (newsGroup){
             case ALL:
-                 result = communicator.doInBackground( null);
+                 result = communicator.sendRequest( null);
                 break;
             case BY_USER:
                 SharedPreferences preferences = context.getSharedPreferences(LoginActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
                 Map<String, String> postDataMap = new HashMap<String, String>();
                 postDataMap.put("username", preferences.getString(LoginActivity.USERNAME_PREF_KEY, ""));
-                result = communicator.doInBackground(postDataMap);
+                result = communicator.sendRequest(postDataMap);
                 break;
             default: break;
         }
@@ -100,6 +100,7 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
     }
 
     private List<Declaration> setDeclarationList(JSONArray jsonArray){
+        BackgroundImageLoader imageLoader;
         try {
             for(int i = 0; i<jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -115,7 +116,8 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
                 declaration.setImportance(jsonObject.getString("importance"));
                 declaration.setUrgence(jsonObject.getString("urgence"));
                 declaration.setTag(jsonObject.getString("tag"));
-
+                imageLoader = new BackgroundImageLoader(jsonObject.getInt("id_incident"), declaration);
+                imageLoader.execute(declaration.getImage());
                 declarationList.add(declaration);
             }
 

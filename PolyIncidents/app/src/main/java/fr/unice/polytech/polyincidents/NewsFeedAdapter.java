@@ -2,9 +2,11 @@ package fr.unice.polytech.polyincidents;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -35,14 +37,16 @@ public class NewsFeedAdapter extends ArrayAdapter<Declaration> {
         //((TextView)convertView.findViewById(R.id.tagInfo)).setText(declaration.getTag());
 
         if(declaration.getImage() != null){
-            //String url = declaration.getImageURL();
-            //Log.i("ADAPTER", url);
-            //new BackGroundImageLoader((ImageView)convertView.findViewById(R.id.Image)).execute(url);
+            ImageView imageView = (ImageView)convertView.findViewById(R.id.imageInfo);
+            imageView.setImageBitmap(declaration.getImage());
+            Log.i("image", "image set");
         }
-
 
         return convertView;
     }
+
+
+
 
 
 }
