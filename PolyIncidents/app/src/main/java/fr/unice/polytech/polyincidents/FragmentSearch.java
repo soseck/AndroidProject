@@ -71,9 +71,8 @@ public class FragmentSearch extends Fragment  {
         ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Recherche Incidents");
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
 
-
         searchView = (MaterialSearchView) rootView.findViewById((R.id.action_search));
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()) {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 doMySearch (query);
@@ -86,15 +85,14 @@ public class FragmentSearch extends Fragment  {
                 doMySearch(s);
                 return true;
             }
-        });*/
-
+        });
+        */
         return rootView;
     }
 
 
     public void doMySearch( String query){
         new BackgroundSearch(this.getContext(), SCRIPT_FILE, VIEW_ID, query).execute(NewsGroup.ALL);
-
     }
 
 

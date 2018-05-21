@@ -1,5 +1,6 @@
 package fr.unice.polytech.polyincidents;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -37,6 +38,11 @@ public class MenuActivity extends AppCompatActivity {
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = FragmentSearch.newInstance();
+                                Intent intent = getIntent();
+                                if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+                                    String query = intent.getStringExtra(SearchManager.QUERY);
+                                    FragmentSearch.newInstance().doMySearch(query);
+                                }
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = FragmentPhoto.newInstance();
@@ -68,6 +74,7 @@ public class MenuActivity extends AppCompatActivity {
         //Used to select an item programmatically
         bottomNavigationView.setSelectedItemId(0);
     }
+
 
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
