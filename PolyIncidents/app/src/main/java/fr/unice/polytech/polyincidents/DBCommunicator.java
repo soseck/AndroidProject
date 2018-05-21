@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by Sokhna on 12/05/2018.
  */
 
-public class DBCommunicator {
+public class DBCommunicator extends AsyncTask<Map<String , String>, Void, String>{
 
     //public static final String SERVER_URL = "http://polyincidents.gearhostpreview.com";
     public static final String SERVER_URL = "http://192.168.43.92";
@@ -33,7 +33,8 @@ public class DBCommunicator {
         this.postDataMap = null;
     }
 
-    public String sendRequest(Map<String, String>... postDataMaps){
+    @Override
+    public String doInBackground(Map<String, String>... postDataMaps){
             try {
                 this.postDataMap = (postDataMaps == null ) ? null : postDataMaps[0];
                 URL url = new URL(SERVER_URL + scriptfile);
@@ -72,7 +73,7 @@ public class DBCommunicator {
                 reader.close();
                 inputStream.close();
                 urlConnection.disconnect();
-                System.out.println("DB comm "+ result);
+                System.out.println("DB comm "+ scriptfile + result);
                 return result;
 
             } catch (MalformedURLException e) {
