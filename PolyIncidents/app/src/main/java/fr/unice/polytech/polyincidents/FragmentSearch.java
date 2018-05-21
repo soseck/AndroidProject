@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.support.v7.widget.Toolbar;
 import android.content.Intent;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class FragmentSearch extends Fragment  {
     public static final String SCRIPT_FILE_TEST = "/getAll.php";
     public static final Integer VIEW_ID = R.id.SearchListView;
 
+
     public static FragmentSearch newInstance() {
         FragmentSearch fragment = new FragmentSearch();
         return fragment;
@@ -52,7 +54,6 @@ public class FragmentSearch extends Fragment  {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        String searchtext ="title";
        // new BackgroundSearch(this.getContext(), SCRIPT_FILE, VIEW_ID, searchtext).execute(NewsGroup.ALL);
 
 
@@ -62,12 +63,17 @@ public class FragmentSearch extends Fragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);//Make sure you have this line of code.
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        ListView mListView = (ListView) rootView.findViewById(R.id.search);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, new Historical().getHist());
+        mListView.setAdapter(adapter);
+
         SearchView simpleSearchView = (SearchView) rootView.findViewById(R.id.action_search); // inititate a search view
 
         // perform set on query text listener event
@@ -75,15 +81,16 @@ public class FragmentSearch extends Fragment  {
             @Override
             public boolean onQueryTextSubmit(String query) {
             // do something on text submit
+                new Historical().getHist().add(query);
                 doMySearch(query);
-              //  EventBus.getDefault().post(new QueryEvent(query));
-                return false;
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
             // do something when text changes
-                doMySearch(newText);
+               // doMySearch(newText);
+                new Historical().getHist().add(newText);
                 return false;
             }
         });
