@@ -113,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_action_incident_title"
-            android:hint="Lieu" />
+            android:hint="*Lieu" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -201,7 +201,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawableLeft="@drawable/ic_action_incident_title"
-            android:hint="Titre" />
+            android:hint="*Titre" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -221,7 +221,7 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:drawableLeft="@drawable/ic_action_incident_description"
-            android:hint="Décrivez l'incident..." />
+            android:hint="*Décrivez l'incident..." />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout

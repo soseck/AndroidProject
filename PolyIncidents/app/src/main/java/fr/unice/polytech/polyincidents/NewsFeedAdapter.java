@@ -34,7 +34,7 @@ public class NewsFeedAdapter extends ArrayAdapter<Declaration> {
         ((TextView)convertView.findViewById(R.id.contentInfo)).setText(declaration.getContent());
         //((TextView)convertView.findViewById(R.id.tagInfo)).setText(declaration.getTag());
 
-        if(declaration.isWithImage()){
+        if(declaration.getImage() != null){
             //String url = declaration.getImageURL();
             //Log.i("ADAPTER", url);
             //new BackGroundImageLoader((ImageView)convertView.findViewById(R.id.Image)).execute(url);

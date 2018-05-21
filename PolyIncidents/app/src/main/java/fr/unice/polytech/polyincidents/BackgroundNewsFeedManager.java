@@ -52,13 +52,13 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         String result = "";
         switch (newsGroup){
             case ALL:
-                 result = communicator.sendRequest( null);
+                 result = communicator.doInBackground( null);
                 break;
             case BY_USER:
                 SharedPreferences preferences = context.getSharedPreferences(LoginActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
                 Map<String, String> postDataMap = new HashMap<String, String>();
                 postDataMap.put("username", preferences.getString(LoginActivity.USERNAME_PREF_KEY, ""));
-                result = communicator.sendRequest(postDataMap);
+                result = communicator.doInBackground(postDataMap);
                 break;
             default: break;
         }

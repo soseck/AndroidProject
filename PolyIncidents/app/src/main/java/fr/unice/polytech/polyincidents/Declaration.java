@@ -1,6 +1,8 @@
 package fr.unice.polytech.polyincidents;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +16,7 @@ import java.util.Map;
 public class Declaration {
 
     private String title, content, location, tag, importance, urgence;
-    private boolean withImage;
+    private Bitmap image;
     private String dateValue;
     private User author;
 
@@ -23,8 +25,8 @@ public class Declaration {
     public static final String LOCATION = "location";
     public static final String TAG = "tag";
     public static final String IMPORTANCE = "importance";
-    public static final String URGENGY = "urgency";
-    public static final String WITH_IMAGE = "withImage";
+    public static final String URGENGY = "urgence";
+    public static final String WITH_IMAGE = "image";
     public static final String DATE = "date";
 
     public Declaration(String title, String content, String location) {
@@ -34,7 +36,7 @@ public class Declaration {
         this.tag = null;
         this.urgence = null;
         this.importance = null;
-        this.withImage = false;
+        this.image = null;
         this.dateValue = null;
         this.author = null;
 
@@ -50,9 +52,9 @@ public class Declaration {
         mapPostData.put(LOCATION, location);
         mapPostData.put(URGENGY, urgence);
         mapPostData.put(IMPORTANCE, importance);
-        mapPostData.put(WITH_IMAGE, String.valueOf(withImage));
         mapPostData.put(TAG, tag);
         mapPostData.put(DATE, dateValue);
+        //Log.i("image", "date = "+title);
 
         return mapPostData;
     }
@@ -81,8 +83,8 @@ public class Declaration {
         this.urgence = urgence;
     }
 
-    public void setWithImage(boolean withImage) {
-        this.withImage = withImage;
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
     public void setDateValue(String dateValue) {
@@ -117,10 +119,9 @@ public class Declaration {
         return urgence;
     }
 
-    public boolean isWithImage() {
-        return withImage;
+    public Bitmap getImage(){
+        return this.image;
     }
-
     public String getDateValue() {
         return dateValue;
     }

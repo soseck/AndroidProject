@@ -42,10 +42,10 @@ public class BackgroundLoginManager extends AsyncTask<User, Void, String> {
         connectedUser = params[0];
         post_data.put("username", connectedUser.getUserID());
         post_data.put("password", connectedUser.getPassword());
-        String result = communicator.sendRequest(post_data);
+        String result = communicator.doInBackground(post_data);
         if(result.equals(SUCCESS_LOGIN_MESSAGE)){
             DBCommunicator communicator = new DBCommunicator("/connectedUser.php", "POST");
-            String connectedUserAttributes = communicator.sendRequest( post_data);
+            String connectedUserAttributes = communicator.doInBackground( post_data);
             connectedUser.setUserAttributes(connectedUserAttributes);
             ((LoginActivity)this.context).setConnectedUser(connectedUser);
         }
