@@ -19,10 +19,10 @@ import java.util.Map;
  * Created by Sokhna on 12/05/2018.
  */
 
-public class DBCommunicator extends AsyncTask<Map<String , String>, Void, String>{
+public class DBCommunicator {
 
-    //public static final String SERVER_URL = "http://polyincidents.gearhostpreview.com";
-    public static final String SERVER_URL = "http://192.168.43.92";
+    public static final String SERVER_URL = "http://polyincidents.gearhostpreview.com";
+    //public static final String SERVER_URL = "http://192.168.43.92";
 
     private Map<String, String> postDataMap;
     private String scriptfile, requestMethod;
@@ -32,9 +32,8 @@ public class DBCommunicator extends AsyncTask<Map<String , String>, Void, String
         this.requestMethod = requestMethod;
         this.postDataMap = null;
     }
-
-    @Override
-    public String doInBackground(Map<String, String>... postDataMaps){
+    
+    public String sendRequest(Map<String, String>... postDataMaps){
             try {
                 this.postDataMap = (postDataMaps == null ) ? null : postDataMaps[0];
                 URL url = new URL(SERVER_URL + scriptfile);

@@ -14,8 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class MenuActivity extends AppCompatActivity {
     Fragment selectedFragment;
@@ -27,6 +27,8 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.acitivity_menu);
         bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
+        //Test Login Twitter
+        Toast.makeText(this, getIntent().getStringExtra("username"), Toast.LENGTH_SHORT).show();
         selectedFragment = FragmentHome.newInstance();
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -96,6 +98,10 @@ public class MenuActivity extends AppCompatActivity {
 
     public void showMap(View view){
         ((FragmentDeclaration)selectedFragment).showMap(view);
+    }
+
+    public void tweet(View view){
+        ((FragmentDeclaration)selectedFragment).tweet(view);
     }
 
     @Override

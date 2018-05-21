@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
     <string name="app_name">Poly\'Incidents</string>
     <string name="app_declaration">Déclaration</string>
     <string name="title_home">Home</string>
@@ -39,5 +39,10 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="error_invalid_email">This email address is invalid</string>
+    <string name="title_activity_twitter_login">TwitterLoginActivity</string>
+
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">3Tw3Uu6w8lCW7idPLV66d0cBy</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">LXnFRGkNjKJV6okzqsJpeqXYB5cENA5rhKx5NyW692Dm7KSmWg
+</string>
 
 </resources>

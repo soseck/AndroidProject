@@ -48,7 +48,7 @@ public class BackgroundFieldsValueManager extends AsyncTask<String, Void, List<S
         field = params[0];
         Map<String, String> postDataMap = new HashMap<String, String>();
         postDataMap.put("field", field);
-        String result = communicator.doInBackground(postDataMap);
+        String result = communicator.sendRequest(postDataMap);
         if(!result.equals(FAILURE_POST_MESSAGE)){
             result = new String(result.getBytes(Charset.forName("ISO-8859-1")),Charset.forName("UTF-8"));
 
