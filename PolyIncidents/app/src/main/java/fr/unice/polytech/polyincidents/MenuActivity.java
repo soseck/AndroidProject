@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
 public class MenuActivity extends AppCompatActivity {
     Fragment selectedFragment;
     BottomNavigationView bottomNavigationView;
@@ -54,6 +56,8 @@ public class MenuActivity extends AppCompatActivity {
                     }
                 });
 
+
+
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         //  transaction.replace(R.id.frame_layout, ItemOneFragment.newInstance());
@@ -80,26 +84,6 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-
-        getMenuInflater().inflate(R.menu.menu_search,menu);
-
-        final MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                //votre code ici
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
-
         return true;
     }
 
@@ -114,11 +98,5 @@ public class MenuActivity extends AppCompatActivity {
     //</editor-fold>
 
 
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-       return new FragmentSearch().onCreateOptionsMenu(menu);
-    }
-*/
 
 }

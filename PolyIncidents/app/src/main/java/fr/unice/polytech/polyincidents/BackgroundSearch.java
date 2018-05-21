@@ -21,10 +21,10 @@ import java.util.Map;
 import static fr.unice.polytech.polyincidents.NewsGroup.ALL;
 
 /**
- * Created by user on 13/05/2018.
+ * Created by Donélia on 21/05/2018.
  */
 
-public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<Declaration>> {
+public class BackgroundSearch extends AsyncTask<NewsGroup, Void, List<Declaration>> {
 
     private Context context;
     private DBCommunicator communicator;
@@ -32,18 +32,20 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
     private List<Declaration> declarationList;
     private String scriptFile;
     private Integer viewID;
+    private String searchtext;
 
 
     public static final String FAILURE_POST_MESSAGE = "fail";
     public static final String REQUEST_METHOD = "POST";
 
-    public BackgroundNewsFeedManager(Context context, String scriptFile, Integer viewID) {
+    public BackgroundSearch (Context context, String scriptFile, Integer viewID, String searchtext) {
         this.context = context;
         this.scriptFile = scriptFile;
         this.communicator = new DBCommunicator(scriptFile, REQUEST_METHOD);
         this.newsGroup = ALL;
         this.declarationList = new ArrayList<>();
         this.viewID = viewID;
+        this.searchtext = searchtext;
     }
 
     @Override
@@ -52,12 +54,8 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         String result = "";
         switch (newsGroup){
             case ALL:
-                 result = communicator.doInBackground( null);
-                break;
-            case BY_USER:
-                SharedPreferences preferences = context.getSharedPreferences(LoginActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
                 Map<String, String> postDataMap = new HashMap<String, String>();
-                postDataMap.put("username", preferences.getString(LoginActivity.USERNAME_PREF_KEY, ""));
+                postDataMap.put("searchtext", searchtext);
                 result = communicator.doInBackground(postDataMap);
                 break;
             default: break;
@@ -104,9 +102,9 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
             for(int i = 0; i<jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Declaration declaration = new Declaration();
-                    User author = new User();
-                    author.setSurname(jsonObject.getString("surname"));
-                    author.setName(jsonObject.getString("name"));
+                User author = new User();
+                author.setSurname(jsonObject.getString("surname"));
+                author.setName(jsonObject.getString("name"));
                 declaration.setAuthor(author);
                 declaration.setTitle(jsonObject.getString("title"));
                 declaration.setContent(jsonObject.getString("content"));
