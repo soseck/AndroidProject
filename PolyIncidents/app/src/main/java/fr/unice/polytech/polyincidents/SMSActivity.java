@@ -16,21 +16,23 @@ import android.widget.Toast;
 
 public class SMSActivity extends Activity {
 
+    private Button buttonSMS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_declaration);
 
-        Button startBtn = (Button) findViewById(R.id.ButtonSMS);
-        startBtn.setOnClickListener(new View.OnClickListener() {
+        buttonSMS = (Button) findViewById(R.id.ButtonSMS);
+
+        buttonSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 sendSMS();
             }
         });
     }
 
-    protected void sendSMS() {
+    protected void sendSMS(){
         Log.i("Send SMS", "");
         Intent smsIntent = new Intent(Intent.ACTION_VIEW);
 

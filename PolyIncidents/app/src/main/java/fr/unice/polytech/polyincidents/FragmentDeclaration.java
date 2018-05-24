@@ -48,6 +48,7 @@ public class FragmentDeclaration extends Fragment {
     private File file;
     private Uri fileUri;
     private Bitmap bitmap;
+    private Button buttonSMS;
 
     EditText title, content, location, date, hour;
     MaterialBetterSpinner importance, urgence, tag;
@@ -235,6 +236,29 @@ public class FragmentDeclaration extends Fragment {
            //     .image(fileUri);//sharing image uri
         builder.show();
     }
+
+
+    protected void sendSMS() {
+        Log.i("Send SMS", "");
+        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+        String text = "Un nouvel incident nommé" + title.getContext() + " vient de se derouler." + " Voici sa description "+ content.getText();
+
+        smsIntent.setData(Uri.parse("smsto:"));
+        smsIntent.setType("vnd.android-dir/mms-sms");
+        smsIntent.putExtra("address", new String("01234"));
+        smsIntent.putExtra("sms_body", text);
+
+        try {
+            startActivity(smsIntent);
+            //finish();
+            Log.i("Finished sending SMS...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this.getActivity(),
+                    "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
+        }
+
+     }
+
 
     private void fillSpinners() {
         BackgroundFieldsValueManager fieldsValueManager = new BackgroundFieldsValueManager(getContext(), R.id.tag);

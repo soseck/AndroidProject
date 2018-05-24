@@ -98,6 +98,11 @@ public class MenuActivity extends AppCompatActivity {
         ((FragmentDeclaration)selectedFragment).tweet(view);
     }
 
+    public void sendSMS (View view) {
+        ((FragmentDeclaration)selectedFragment).sendSMS();
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
