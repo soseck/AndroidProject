@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
+import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -32,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
+import de.greenrobot.event.EventBus;
+
 import static android.support.v4.media.session.MediaButtonReceiver.handleIntent;
 
 /**
@@ -42,7 +45,6 @@ public class FragmentSearch extends Fragment  {
 
     MaterialSearchView searchView;
     public static final String SCRIPT_FILE = "/getSearch.php";
-    public static final String SCRIPT_FILE_TEST = "/getAll.php";
     public static final Integer VIEW_ID = R.id.SearchListView;
 
 
@@ -70,9 +72,10 @@ public class FragmentSearch extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        /*
         ListView mListView = (ListView) rootView.findViewById(R.id.search);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, new Historical().getHist());
-        mListView.setAdapter(adapter);
+        mListView.setAdapter(adapter);*/
 
         SearchView simpleSearchView = (SearchView) rootView.findViewById(R.id.action_search); // inititate a search view
 
@@ -81,7 +84,10 @@ public class FragmentSearch extends Fragment  {
             @Override
             public boolean onQueryTextSubmit(String query) {
             // do something on text submit
-                new Historical().getHist().add(query);
+                EventBus.getDefault().post(new QueryEvent(query));
+                SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(),
+                        MySuggestionProvider.AUTHORITY, MySuggestionProvider.MODE);
+                suggestions.saveRecentQuery(query, null);
                 doMySearch(query);
                 return true;
             }
@@ -90,7 +96,6 @@ public class FragmentSearch extends Fragment  {
             public boolean onQueryTextChange(String newText) {
             // do something when text changes
                // doMySearch(newText);
-                new Historical().getHist().add(newText);
                 return false;
             }
         });
