@@ -269,7 +269,7 @@
         android:layout_width="100dp"
         android:layout_height="36dp"
         android:background="@color/colorPrimary"
-        android:onClick="share"
+        android:onClick="sendDeclaration"
         android:text="Share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

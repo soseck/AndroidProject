@@ -65,7 +65,7 @@ public class ShareActivity extends Activity implements Serializable {
         return this.declaration;
     }
 
-    
+
 
     public void sendMail (View view)
     {
