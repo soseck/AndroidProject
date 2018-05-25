@@ -66,12 +66,6 @@ public class ShareActivity extends Activity implements Serializable {
     }
 
 
-
-    public void sendMail (View view)
-    {
-        FragmentDeclaration.newInstance().sendMail();
-    }
-
     public void tweet(View view){
         TweetComposer.Builder builder = new TweetComposer.Builder(this)
                 .text("@PIncidents " + extrasContent);//any sharing text here
@@ -80,7 +74,7 @@ public class ShareActivity extends Activity implements Serializable {
     }
 
 
-    protected void sendSMS() {
+    public void sendSMS(View view) {
         Log.i("Send SMS", "");
         Intent smsIntent = new Intent(Intent.ACTION_VIEW);
         String text = "Un nouvel incident nommé: " + extrasTitre + " vient d'être posté." + " Voici sa description: "+ extrasContent;
@@ -99,5 +93,14 @@ public class ShareActivity extends Activity implements Serializable {
                     "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void sendMail(View view){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, extrasTitre);
+        intent.putExtra(Intent.EXTRA_TEXT, extrasContent);
+        Intent mailer = Intent.createChooser(intent, null);
+        startActivity(mailer);
     }
 }
