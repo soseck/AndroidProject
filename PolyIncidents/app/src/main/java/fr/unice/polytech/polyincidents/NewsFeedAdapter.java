@@ -42,35 +42,17 @@ public class NewsFeedAdapter extends ArrayAdapter<Declaration> {
         declaration = getItem(position);
         ((ImageView)convertView.findViewById(R.id.imageInfo)).setImageBitmap(declaration.getImage());
         ((TextView)convertView.findViewById(R.id.titleInfo)).setText(declaration.getTitle());
-        //((TextView)convertView.findViewById(R.id.authorInfo)).setText(declaration.getAuthor().getSurname() + declaration.getAuthor().getName());
-        //((TextView)convertView.findViewById(R.id.location)).setText(declaration.getLocation());
-        ((TextView)convertView.findViewById(R.id.dateInfo)).setText(declaration.getDateValue());
-        //((TextView)convertView.findViewById(R.id.urgenceInfo)).setText(declaration.getUrgence());
+        ((TextView)convertView.findViewById(R.id.authorInfo)).setText(declaration.getAuthor().getSurname());
+        ((TextView)convertView.findViewById(R.id.locationInfo)).setText(declaration.getLocation());
+        ((TextView)convertView.findViewById(R.id.urgenceInfo)).setText(declaration.getUrgence());
         //((TextView)convertView.findViewById(R.id.importanceInfo)).setText(declaration.getImportance());
         ((TextView)convertView.findViewById(R.id.contentInfo)).setText(declaration.getContent());
-        //((TextView)convertView.findViewById(R.id.tagInfo)).setText(declaration.getTag());
+        ((TextView)convertView.findViewById(R.id.tagInfo)).setText(declaration.getTag());
+        ((TextView)convertView.findViewById(R.id.statusInfo)).setText(declaration.getStatut());
 
 
         return convertView;
     }
-
-    public void showPopup(View v) {
-        TextView txtclose;
-        Button btnChange;
-        myDialog.setContentView(R.layout.change_state);
-        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
-        btnChange = (Button) myDialog.findViewById(R.id.btnChange);
-        txtclose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
-
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
-
 
     public void showPopUp(View view) {
         TextView txtclose;

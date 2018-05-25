@@ -15,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.Toolbar;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -49,9 +51,6 @@ public class MenuActivity extends AppCompatActivity {
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = FragmentSearch.newInstance();
-                                break;
-                            case R.id.action_item3:
-                                selectedFragment = FragmentPhoto.newInstance();
                                 break;
                             case R.id.action_item4:
                                 selectedFragment = FragmentDeclaration.newInstance();
@@ -131,19 +130,16 @@ public class MenuActivity extends AppCompatActivity {
     }
     //</editor-fold>
 
-    public void createPop(final View view) {
+    public void createPopup(final View view) {
         final Dialog dialog = new Dialog(MenuActivity.this);
-        Button btn_show = (Button) findViewById(R.id.share);
+        ImageView btn_show = (ImageView)findViewById(R.id.share);
         btn_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-
                 final Dialog dialog = new Dialog(view.getContext());
                 dialog.setContentView(R.layout.popup_share);
                 dialog.setTitle("Hello");
-
                 dialog.show();
-
             }
         });
 
@@ -161,12 +157,12 @@ public class MenuActivity extends AppCompatActivity {
 // because at that stage most probably the view isn't drawn yet, so it will return (0, 0))
 
 
-    private void showPopup() {
+    private void showPopup(View view) {
         int popupWidth = 200;
         int popupHeight = 150;
 
         // Inflate the popup_layout.xml
-        LinearLayout viewGroup = (LinearLayout) findViewById(R.id.popup);
+        RelativeLayout viewGroup = (RelativeLayout)findViewById(R.id.popup);
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = layoutInflater.inflate(R.layout.popup_share, viewGroup);
 
