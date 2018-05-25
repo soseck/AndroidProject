@@ -74,7 +74,7 @@ public class ShareActivity extends Activity implements Serializable {
     }
 
 
-    public void sendSMS(View view) {
+    protected void sendSMS(View view) {
         Log.i("Send SMS", "");
         Intent smsIntent = new Intent(Intent.ACTION_VIEW);
         String text = "Un nouvel incident nommé: " + extrasTitre + " vient d'être posté." + " Voici sa description: "+ extrasContent;

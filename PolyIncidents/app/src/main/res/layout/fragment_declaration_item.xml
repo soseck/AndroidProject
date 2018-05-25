@@ -14,38 +14,25 @@
     <RelativeLayout
         android:layout_width="500dp"
         android:layout_height="250dp"
-        android:background="@color/tw__composer_black">
+        android:background="@color/colorWhite">
 
         <ImageView
             android:id="@+id/imageInfo"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="25dp"
-            android:layout_toEndOf="@+id/imageView14"
+            android:layout_above="@+id/imageView6"
+            android:layout_marginBottom="22dp"
+            android:layout_marginEnd="88dp"
+            android:layout_toStartOf="@+id/stateButton"
             app:srcCompat="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/titleInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/imageInfo"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1"
-            android:shadowColor="@color/text_shadow"
-            android:shadowRadius="2"
-            android:text="TitreIncident"
-            android:textColor="@color/white"
-            android:textSize="25dp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/contentInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/dateInfo"
-            android:layout_alignEnd="@+id/imageView14"
-            android:layout_alignParentStart="true"
+            android:layout_alignBottom="@+id/imageInfo"
+            android:layout_alignStart="@+id/dateInfo"
+            android:layout_marginBottom="23dp"
             android:gravity="center_vertical"
             android:lines="3"
             android:text="Description"
@@ -56,9 +43,9 @@
             android:id="@+id/dateInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/share"
-            android:layout_alignEnd="@+id/share"
-            android:layout_marginEnd="29dp"
+            android:layout_alignBottom="@+id/imageInfo"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="19dp"
             android:layout_weight="1"
             android:text="jj/mm/aaaa"
             android:textColor="@color/white"
@@ -69,38 +56,20 @@
             android:id="@+id/imageView6"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_below="@+id/dateInfo"
-            android:layout_toEndOf="@+id/imageView14"
-            android:background="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/dateInfo"
+            android:background="@color/colorWhite"
             app:srcCompat="@drawable/sharebutton" />
 
         <Button
             android:id="@+id/share"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/imageView14"
-            android:onClick="createPop"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/imageView14"
-            android:layout_width="200dp"
-
-            android:layout_height="50dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/dateInfo"
-            android:background="@color/white"
-            app:srcCompat="@drawable/star" />
-
-        <Button
-            android:id="@+id/favoris"
-            android:layout_width="143dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/dateInfo"
-            android:layout_marginEnd="11dp"
-            android:layout_toStartOf="@+id/imageView6"
-            android:background="@color/white"
+            android:background="@color/colorWhite"
+            android:backgroundTint="@color/colorWhite"
+            android:onClick="createPop"
             android:visibility="invisible" />
 
 
@@ -110,8 +79,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/contentInfo"
-            android:onClick="showPopUp"
-            app:srcCompat="?android:attr/actionModePasteDrawable" />
+            android:onClick="showPopUp"/>
+
+        <TextView
+            android:id="@+id/titleInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/contentInfo"
+            android:layout_alignStart="@+id/contentInfo"
+            android:text="Un titre"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
