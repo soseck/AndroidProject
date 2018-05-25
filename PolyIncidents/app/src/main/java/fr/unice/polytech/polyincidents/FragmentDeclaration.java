@@ -304,6 +304,7 @@ public class FragmentDeclaration extends Fragment {
 
      protected void sendMail(){
 
+
      }
 
     private void fillSpinners() {
