@@ -3,8 +3,6 @@ package fr.unice.polytech.polyincidents;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.GridView;
 import android.widget.ListAdapter;
@@ -14,8 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +32,6 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
     private List<Declaration> declarationList;
     private String scriptFile;
     private Integer viewID;
-    private Map<NewsGroup, List<Declaration>> cachedData;
 
 
     public static final String FAILURE_POST_MESSAGE = "fail";
@@ -49,14 +44,12 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         this.newsGroup = ALL;
         this.declarationList = new ArrayList<>();
         this.viewID = viewID;
-        this.cachedData = new HashMap<>();
     }
 
     @Override
     protected List<Declaration> doInBackground(NewsGroup... params) {
         newsGroup = params[0];
-        if(cachedData.containsKey(newsGroup)) return cachedData.get(newsGroup);
-            String result = "";
+        String result = "";
         switch (newsGroup){
             case ALL:
                  result = communicator.sendRequest( null);
@@ -78,7 +71,6 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
                 e.printStackTrace();
             }
         }
-        cachedData.put(newsGroup, declarationList);
         return declarationList;
 
     }
@@ -111,7 +103,6 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         BackgroundImageLoader imageLoader;
         try {
             for(int i = 0; i<jsonArray.length(); i++){
-
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 Declaration declaration = new Declaration();
                     User author = new User();
@@ -125,7 +116,8 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
                 declaration.setImportance(jsonObject.getString("importance"));
                 declaration.setUrgence(jsonObject.getString("urgence"));
                 declaration.setTag(jsonObject.getString("tag"));
-                setDeclarationImage(declaration, jsonObject.getInt("id_incident"));
+                imageLoader = new BackgroundImageLoader(jsonObject.getInt("id_incident"), declaration);
+                imageLoader.execute();
                 declarationList.add(declaration);
             }
 
@@ -134,34 +126,6 @@ public class BackgroundNewsFeedManager extends AsyncTask<NewsGroup, Void, List<D
         }
 
         return declarationList;
-    }
-
-    private void setDeclarationImage(Declaration declaration, int incident_ID){
-        Bitmap bitmap = null;
-        DBCommunicator communicator = new DBCommunicator("/getImageURL.php", "POST");
-        Map<String, String > postDataMap = new HashMap<>();
-
-        postDataMap.put("incident_ID", String.valueOf(incident_ID));
-
-        String result = communicator.sendRequest(postDataMap);
-        if(result.equals("No Image")){
-            return ;
-        }
-        String filepath ="";
-        try {
-            filepath = ((JSONObject)(new JSONArray(result.toString()).get(0))).getString("filepath");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        String image_url = DBCommunicator.SERVER_URL + "/" + filepath;
-        InputStream stream = null;
-        try {
-            stream = new java.net.URL(image_url).openStream();
-            bitmap = BitmapFactory.decodeStream(stream);
-            declaration.setImage(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public List<Declaration> getDeclarationList() {

@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +49,7 @@ public class FragmentDeclaration extends Fragment {
     private File file;
     private Uri fileUri;
     private Bitmap bitmap;
-    private Button buttonSMS;
+    private Button valider;
 
     EditText title, content, location, date, hour;
     MaterialBetterSpinner importance, urgence, tag;
@@ -56,6 +57,7 @@ public class FragmentDeclaration extends Fragment {
     ImageView imgTaken;
 
     private static final int CAM_REQUEST=1888;
+    private Declaration declaration;
 
 
     public static FragmentDeclaration newInstance() {
@@ -81,10 +83,6 @@ public class FragmentDeclaration extends Fragment {
         title = (EditText) rootView.findViewById(R.id.title);
         content = (EditText) rootView.findViewById(R.id.content);
         location = (EditText) rootView.findViewById(R.id.location);
-
-        //Date & Hour
-        date = (EditText) rootView.findViewById(R.id.date);
-        hour = (EditText) rootView.findViewById(R.id.hour);
 
         //Spinners
         importance = (MaterialBetterSpinner) rootView.findViewById(R.id.importance);
@@ -160,7 +158,7 @@ public class FragmentDeclaration extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-    public void sendDeclaration(View view) {
+    public Boolean sendDeclaration(View view) {
         Log.i("image", "In SendDeclaration");
 
         //Mandatory fields must be set.
@@ -168,17 +166,21 @@ public class FragmentDeclaration extends Fragment {
                 || content.getText().toString().matches("")
                 || location.getText().toString().matches("")) {
             Toast.makeText(getContext(), "Remplir les champs obligatoires", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
         Log.i("image", "Mandatory fields not empty.");
 
-        Declaration declaration = new Declaration(title.getText().toString(),
+        declaration = new Declaration(title.getText().toString(),
                                                     content.getText().toString(),
                                                     location.getText().toString());
         Log.i("image", "mandatory fields set in declaration");
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
 
-        //TimeStamp by default
-        declaration.setDateValue( (date.getText().toString().matches("")) ? null : date.getText().toString()); //TODO timestamp
+        /*TimeStamp by default
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(Calendar.getInstance().getTime())*/
+        this.declaration.setDateValue(today.toString()); //TODO timestamp
         Log.i("image", "DateValue set");
 
         //Values from spinners
@@ -198,9 +200,45 @@ public class FragmentDeclaration extends Fragment {
         }
 
         //sendDeclaration
+
         Log.i("image", "About to execute PostManager");
         BackgroundPostManager postManager = new BackgroundPostManager(view.getContext());
         postManager.execute(declaration);
+        Intent i = new Intent(getContext(), ShareActivity.class);
+        i.putExtra("title", declaration.getTitle());
+        i.putExtra("descripton", declaration.getContent());
+        i.putExtra("importance", declaration.getImportance());
+        i.putExtra("location", declaration.getLocation());
+        i.putExtra("urgence", declaration.getUrgence());
+
+
+        startActivity(i);
+        //sendDeclaration(view);
+
+
+
+        return true;
+
+    }
+
+    public void shareDeclaration() {
+        //sendDeclaration(view);
+        Button btn = (Button)getActivity().findViewById(R.id.imageShare);
+        final Declaration declaration = this.declaration;
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ((sendDeclaration(v))) {
+                    Declaration d = declaration;
+                    Intent i = new Intent(getContext(), ShareActivity.class);
+                    i.putExtra("title", declaration.getTitle());
+                    startActivity(i);
+                }
+                //startActivity(new Intent(getContext(), ShareActivity.class));
+
+            }
+        });
     }
 
     public void takePicture(View view){
@@ -241,11 +279,11 @@ public class FragmentDeclaration extends Fragment {
     protected void sendSMS() {
         Log.i("Send SMS", "");
         Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-        String text = "Un nouvel incident nommé" + title.getContext() + " vient de se derouler." + " Voici sa description "+ content.getText();
+        String text = "Un nouvel incident nommé: " + title.getText() + " vient d'être posté." + " Voici sa description: "+ content.getText();
 
         smsIntent.setData(Uri.parse("smsto:"));
         smsIntent.setType("vnd.android-dir/mms-sms");
-        smsIntent.putExtra("address", new String("01234"));
+        smsIntent.putExtra("address", new String(""));
         smsIntent.putExtra("sms_body", text);
 
         try {
@@ -260,6 +298,14 @@ public class FragmentDeclaration extends Fragment {
      }
 
 
+     protected void call(){
+
+     }
+
+     protected void sendMail(){
+
+     }
+
     private void fillSpinners() {
         BackgroundFieldsValueManager fieldsValueManager = new BackgroundFieldsValueManager(getContext(), R.id.tag);
         fieldsValueManager.execute(TAG_KEY);
@@ -269,6 +315,11 @@ public class FragmentDeclaration extends Fragment {
 
         fieldsValueManager = new BackgroundFieldsValueManager(getContext(), R.id.importance);
         fieldsValueManager.execute(IMPORTANCE_KEY);
+    }
+
+
+    public Declaration getDeclaration() {
+         return this.declaration;
     }
 
 }

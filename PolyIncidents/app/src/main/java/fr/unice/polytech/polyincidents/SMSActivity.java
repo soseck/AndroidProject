@@ -17,6 +17,7 @@ import android.widget.Toast;
 public class SMSActivity extends Activity {
 
     private Button buttonSMS;
+    /*
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,6 @@ public class SMSActivity extends Activity {
             Toast.makeText(SMSActivity.this,
                     "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 }
 

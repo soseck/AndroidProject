@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/popup"
+    android:layout_height="300dp"
+    android:layout_width="300dp"
+
+   >
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:text="Popup"
+        app:srcCompat="@drawable/sms"
+        android:id="@+id/imageView2" />
+
+    <Button
+        android:id="@+id/sms"
+        android:layout_width="85dp"
+        android:layout_height="33dp"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="17dp"
+        android:onClick="sendSMS"
+        android:text=""
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/mail"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+
+        android:layout_alignBottom="@+id/sms"
+        android:layout_marginStart="32dp"
+        android:layout_toEndOf="@+id/close"
+        android:src="@drawable/twitter"
+        android:text="Popup" />
+
+
+    <Button
+        android:id="@+id/twitter"
+        android:layout_width="85dp"
+        android:layout_height="33dp"
+        android:layout_alignTop="@+id/mail"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:onClick="tweet"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/email"
+        android:layout_width="85dp"
+        android:layout_height="33dp"
+        android:layout_alignBaseline="@+id/twitter"
+        android:layout_alignBottom="@+id/twitter"
+        android:layout_alignParentEnd="true"
+        android:onClick="sendMail"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+
+        android:layout_alignBottom="@+id/twitter"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/gmail_pre_md"
+        android:text="Popup" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:id="@+id/close"
+        android:onClick="createPop"
+        android:layout_marginVertical="100dp"
+        android:layout_marginHorizontal="0dp"
+        android:text="Close" />
+
+
+</RelativeLayout>
