@@ -1,35 +1,30 @@
 package fr.unice.polytech.polyincidents;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
-
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class MenuActivity extends AppCompatActivity {
+    Dialog myDialog;
+
     Fragment selectedFragment;
     BottomNavigationView bottomNavigationView;
     Point p;
@@ -43,6 +38,7 @@ public class MenuActivity extends AppCompatActivity {
         //Test Login Twitter
         Toast.makeText(this, getIntent().getStringExtra("username"), Toast.LENGTH_SHORT).show();
         selectedFragment = FragmentHome.newInstance();
+        myDialog = new Dialog(this);
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -163,8 +159,6 @@ public class MenuActivity extends AppCompatActivity {
     // Get the x and y position after the button is draw on screen
 // (It's important to note that we can't get the position in the onCreate(),
 // because at that stage most probably the view isn't drawn yet, so it will return (0, 0))
-
-
 
 
     private void showPopup() {

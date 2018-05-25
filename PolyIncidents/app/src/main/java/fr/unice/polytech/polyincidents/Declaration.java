@@ -15,7 +15,8 @@ import java.util.Map;
 
 public class Declaration {
 
-    private String title, content, location, tag, importance, urgence;
+    private String title, content, location, tag, importance, urgence, statut;
+    private Integer ID;
     private Bitmap image;
     private String dateValue;
     private User author;
@@ -95,12 +96,24 @@ public class Declaration {
         this.author = author;
     }
 
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public String getContent() {
         return content;
+    }
+
+    public Integer getID() {
+        return ID;
     }
 
     public String getLocation() {
@@ -130,4 +143,7 @@ public class Declaration {
         return author;
     }
 
+    public String getStatut() {
+        return statut;
+    }
 }

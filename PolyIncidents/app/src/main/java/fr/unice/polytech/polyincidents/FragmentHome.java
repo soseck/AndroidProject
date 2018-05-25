@@ -20,7 +20,16 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.widget.Button;
+import android.widget.TextView;
+
 public class FragmentHome extends Fragment {
+
+
     public static final String SCRIPT_FILE = "/getAll.php";
     public static final Integer VIEW_ID = R.id.gridListView;
     Point p;

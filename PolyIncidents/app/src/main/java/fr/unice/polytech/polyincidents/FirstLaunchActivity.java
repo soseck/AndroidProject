@@ -1,6 +1,7 @@
 package fr.unice.polytech.polyincidents;
 
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +12,7 @@ import android.os.Bundle;
  */
 
 public class FirstLaunchActivity extends Activity {
-    public static final String FIRST_APP_LAUNCH = "firstLaunchUser";
+    public static final String FIRST_APP_LAUNCH = "firstLaunchCase";
     public static final String LOGGED_IN_KEY = "alreadyLoggedIn";
 
     @Override
@@ -30,7 +31,13 @@ public class FirstLaunchActivity extends Activity {
 
     private boolean isFirstAppLaunch() {
         SharedPreferences preferences = getSharedPreferences(FIRST_APP_LAUNCH,Context.MODE_PRIVATE);
-        return preferences.getBoolean(LOGGED_IN_KEY, true);
+        SharedPreferences loginPreferences = getSharedPreferences(LoginActivity.USER_PREF_NAME, MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(LOGGED_IN_KEY, loginPreferences.contains(LoginActivity.USERNAME_PREF_KEY));
+        editor.apply();
+
+        return !preferences.getBoolean(LOGGED_IN_KEY, false);
     }
 
     //Set to false when we deconnect.
