@@ -17,14 +17,14 @@ import com.twitter.sdk.android.core.TwitterException;
  * Created by user on 07/05/2018.
  */
 
-    public class FragmentPhoto extends Fragment {
+    public class FragmentTracking extends Fragment {
 
 
         FrameLayout cameraLayout;
         Button captureButton, galleryButton;
 
-        public static FragmentPhoto newInstance() {
-            FragmentPhoto fragment = new FragmentPhoto();
+        public static FragmentTracking newInstance() {
+            FragmentTracking fragment = new FragmentTracking();
             return fragment;
         }
 
@@ -36,7 +36,7 @@ import com.twitter.sdk.android.core.TwitterException;
         @Override
         public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_photo, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_tracking, container, false);
             cameraLayout = (FrameLayout) rootView.findViewById(R.id.cameraLayout);
             captureButton = (Button) rootView.findViewById(R.id.capture);
             galleryButton = (Button) rootView.findViewById(R.id.gallery);

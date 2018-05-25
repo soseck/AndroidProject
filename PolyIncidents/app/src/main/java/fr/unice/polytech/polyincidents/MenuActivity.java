@@ -42,7 +42,7 @@ public class MenuActivity extends AppCompatActivity {
                                 selectedFragment = FragmentSearch.newInstance();
                                 break;
                             case R.id.action_item3:
-                                selectedFragment = FragmentPhoto.newInstance();
+                                selectedFragment = FragmentTracking.newInstance();
                                 break;
                             case R.id.action_item4:
                                 selectedFragment = FragmentDeclaration.newInstance();
